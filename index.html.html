@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<!-- saved from url=(0105)file:///C:/Users/HP840G8/Documents/Codex/2026-06-12/build-a-simple-mobile-friendly-web/outputs/index.html -->
+<html lang="en" data-theme="dark"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>China Survival Companion</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f7f5ef;
+      --surface: #ffffff;
+      --surface-soft: #f1eee6;
+      --text: #1f2523;
+      --muted: #66706c;
+      --line: #ddd8cc;
+      --accent: #c43d31;
+      --accent-strong: #9f2c23;
+      --accent-soft: #ffe2de;
+      --green: #247a55;
+      --shadow: 0 14px 34px rgba(31, 37, 35, 0.08);
+    }
+
+    [data-theme="dark"] {
+      color-scheme: dark;
+      --bg: #141615;
+      --surface: #202422;
+      --surface-soft: #2a302d;
+      --text: #f2f0ea;
+      --muted: #b2bab5;
+      --line: #3a403d;
+      --accent: #ff7468;
+      --accent-strong: #ff9b92;
+      --accent-soft: #3a2221;
+      --green: #7bd7ab;
+      --shadow: 0 16px 36px rgba(0, 0, 0, 0.28);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    .app-shell {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 20px 0 42px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 0 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 40px;
+      height: 40px;
+      flex: 0 0 40px;
+      place-items: center;
+      border-radius: 8px;
+      background: var(--accent);
+      color: white;
+      font-weight: 800;
+    }
+
+    .brand strong {
+      display: block;
+      font-size: 1rem;
+      line-height: 1.1;
+      white-space: nowrap;
+    }
+
+    .brand span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.84rem;
+      white-space: nowrap;
+    }
+
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 42px;
+      padding: 0 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--surface);
+      color: var(--text);
+      cursor: pointer;
+      box-shadow: var(--shadow);
+    }
+
+    .theme-toggle svg {
+      width: 18px;
+      height: 18px;
+      flex: 0 0 18px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+      gap: 22px;
+      align-items: stretch;
+      margin: 10px 0 22px;
+    }
+
+    .intro {
+      display: flex;
+      min-height: 278px;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(24px, 5vw, 46px);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, rgba(196, 61, 49, 0.16), transparent 42%),
+        var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      max-width: 760px;
+      margin-bottom: 12px;
+      font-size: clamp(2.1rem, 7vw, 4.25rem);
+      line-height: 0.98;
+      letter-spacing: 0;
+    }
+
+    .intro p {
+      max-width: 650px;
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 1.04rem;
+    }
+
+    .quick-panel {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .progress-label {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 8px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .progress-label strong {
+      color: var(--text);
+      font-size: 1.35rem;
+    }
+
+    .progress-track {
+      height: 12px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+    }
+
+    .progress-fill {
+      width: 0%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent), var(--green));
+      transition: width 180ms ease;
+    }
+
+    .jump-links {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .jump-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface-soft);
+      color: var(--text);
+      font-size: 0.9rem;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 0.7fr);
+      gap: 22px;
+      align-items: start;
+    }
+
+    .main-stack,
+    .side-stack {
+      display: grid;
+      gap: 22px;
+    }
+
+    section {
+      padding: clamp(18px, 4vw, 28px);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .section-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    h2 {
+      margin-bottom: 4px;
+      font-size: clamp(1.35rem, 3vw, 1.75rem);
+      line-height: 1.18;
+    }
+
+    .section-head p,
+    .muted {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .mini-stat {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 78px;
+      min-height: 38px;
+      padding: 7px 10px;
+      border-radius: 8px;
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .checklist {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .check-item {
+      display: grid;
+      grid-template-columns: 24px minmax(0, 1fr);
+      gap: 12px;
+      align-items: start;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface-soft);
+    }
+
+    .check-item input {
+      width: 20px;
+      height: 20px;
+      margin-top: 2px;
+      accent-color: var(--accent);
+    }
+
+    .check-item label {
+      cursor: pointer;
+    }
+
+    .check-item span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .check-item:has(input:checked) label {
+      color: var(--muted);
+      text-decoration: line-through;
+    }
+
+    .item-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .info-item {
+      min-height: 116px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface-soft);
+    }
+
+    .info-item h3 {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+      font-size: 1rem;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 26px;
+      height: 26px;
+      border-radius: 8px;
+      background: var(--accent);
+      color: white;
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    .info-item p,
+    .guide-list p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+
+    .budget-list,
+    .guide-list {
+      display: grid;
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .budget-list li,
+    .guide-list li {
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--surface-soft);
+    }
+
+    .budget-list li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .budget-list strong:last-child {
+      color: var(--accent-strong);
+      white-space: nowrap;
+    }
+
+    .guide-list strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .note {
+      margin-top: 14px;
+      padding: 14px;
+      border-left: 4px solid var(--green);
+      border-radius: 8px;
+      background: var(--surface-soft);
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+
+    .footer {
+      margin-top: 22px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    @media (max-width: 840px) {
+      .hero,
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .quick-panel {
+        gap: 20px;
+      }
+
+      .side-stack {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .app-shell {
+        width: min(100% - 20px, 1120px);
+        padding-top: 10px;
+      }
+
+      .topbar {
+        align-items: flex-start;
+      }
+
+      .brand span,
+      .theme-toggle span {
+        display: none;
+      }
+
+      .theme-toggle {
+        width: 42px;
+        justify-content: center;
+        padding: 0;
+      }
+
+      .intro {
+        min-height: 250px;
+      }
+
+      .jump-links,
+      .item-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-head {
+        display: block;
+      }
+
+      .mini-stat {
+        margin-top: 12px;
+      }
+
+      .budget-list li {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand" aria-label="China Survival Companion">
+        <div class="brand-mark">中</div>
+        <div>
+          <strong>China Survival Companion</strong>
+          <span>Student move prep</span>
+        </div>
+      </div>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to light mode">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+          <path d="M12 3v2.2M12 18.8V21M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M3 12h2.2M18.8 12H21M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+          <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"></circle>
+        </svg>
+        <span>Light mode</span>
+      </button>
+    </header>
+
+    <main>
+      <div class="hero">
+        <section class="intro" aria-labelledby="pageTitle">
+          <h1 id="pageTitle">Prepare for China with less stress.</h1>
+          <p>A beginner-friendly companion for international students: visa steps, packing, essential apps, realistic budgeting, and the first things to handle after landing.</p>
+        </section>
+
+        <aside class="quick-panel" aria-label="Quick progress and navigation">
+          <div>
+            <div class="progress-label">
+              <span>Visa checklist progress</span>
+              <strong id="progressText">0%</strong>
+            </div>
+            <div class="progress-track" aria-hidden="true">
+              <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
+            </div>
+            <p class="muted" id="progressDetail">0 of 6 completed</p>
+          </div>
+          <nav class="jump-links" aria-label="Page sections">
+            <a href="file:///C:/Users/HP840G8/Documents/Codex/2026-06-12/build-a-simple-mobile-friendly-web/outputs/index.html#visa">Visa</a>
+            <a href="file:///C:/Users/HP840G8/Documents/Codex/2026-06-12/build-a-simple-mobile-friendly-web/outputs/index.html#packing">Packing</a>
+            <a href="file:///C:/Users/HP840G8/Documents/Codex/2026-06-12/build-a-simple-mobile-friendly-web/outputs/index.html#apps">Apps</a>
+            <a href="file:///C:/Users/HP840G8/Documents/Codex/2026-06-12/build-a-simple-mobile-friendly-web/outputs/index.html#budget">Budget</a>
+          </nav>
+        </aside>
+      </div>
+
+      <div class="content-grid">
+        <div class="main-stack">
+          <section id="visa" aria-labelledby="visaTitle">
+            <div class="section-head">
+              <div>
+                <h2 id="visaTitle">Visa Checklist</h2>
+                <p>Track the basics for a student visa application. Requirements can vary, so confirm details with your university and Chinese embassy or consulate.</p>
+              </div>
+              <span class="mini-stat" id="visaStat">0 / 6</span>
+            </div>
+
+            <ul class="checklist" id="visaChecklist">
+              <li class="check-item">
+                <input type="checkbox" id="visa-1">
+                <label for="visa-1"><strong>Receive admission documents</strong><span>Keep your admission notice and JW201 or JW202 form safe.</span></label>
+              </li>
+              <li class="check-item">
+                <input type="checkbox" id="visa-2">
+                <label for="visa-2"><strong>Check passport validity</strong><span>Make sure your passport is valid for your stay and has blank pages.</span></label>
+              </li>
+              <li class="check-item">
+                <input type="checkbox" id="visa-3">
+                <label for="visa-3"><strong>Complete the visa application form</strong><span>Use the details exactly as shown on your passport and school documents.</span></label>
+              </li>
+              <li class="check-item">
+                <input type="checkbox" id="visa-4">
+                <label for="visa-4"><strong>Prepare photo and supporting documents</strong><span>Include passport photos, health forms if needed, and copies of important pages.</span></label>
+              </li>
+              <li class="check-item">
+                <input type="checkbox" id="visa-5">
+                <label for="visa-5"><strong>Book and attend visa appointment</strong><span>Bring originals, copies, payment method, and appointment confirmation.</span></label>
+              </li>
+              <li class="check-item">
+                <input type="checkbox" id="visa-6">
+                <label for="visa-6"><strong>Plan residence permit steps</strong><span>After arrival, many students must convert the visa to a residence permit within the required window.</span></label>
+              </li>
+            </ul>
+          </section>
+
+          <section id="apps" aria-labelledby="appsTitle">
+            <div class="section-head">
+              <div>
+                <h2 id="appsTitle">Essential Apps</h2>
+                <p>Install these before departure where possible, then finish setup after you have a Chinese phone number or bank card.</p>
+              </div>
+            </div>
+
+            <div class="item-grid">
+              <article class="info-item">
+                <h3><span class="tag">W</span>WeChat</h3>
+                <p>Messaging, group chats, mini programs, campus notices, payments, and daily life admin.</p>
+              </article>
+              <article class="info-item">
+                <h3><span class="tag">A</span>Alipay</h3>
+                <p>Mobile payments, transport cards, bills, food delivery links, and many city services.</p>
+              </article>
+              <article class="info-item">
+                <h3><span class="tag">D</span>Didi</h3>
+                <p>Ride-hailing for airport trips, late arrivals, and unfamiliar routes.</p>
+              </article>
+              <article class="info-item">
+                <h3><span class="tag">M</span>Maps</h3>
+                <p>Use Amap or Baidu Maps for accurate local navigation, metro exits, and bus routes.</p>
+              </article>
+              <article class="info-item">
+                <h3><span class="tag">T</span>Translate</h3>
+                <p>Keep a translation app ready for menus, forms, delivery calls, and campus offices.</p>
+              </article>
+              <article class="info-item">
+                <h3><span class="tag">E</span>Ele.me or Meituan</h3>
+                <p>Food delivery, local deals, restaurant discovery, and everyday errands.</p>
+              </article>
+            </div>
+          </section>
+        </div>
+
+        <div class="side-stack">
+          <section id="packing" aria-labelledby="packingTitle">
+            <div class="section-head">
+              <div>
+                <h2 id="packingTitle">Packing List</h2>
+                <p>Prioritize documents, adapters, medication, and first-week comfort items.</p>
+              </div>
+            </div>
+
+            <div class="item-grid">
+              <article class="info-item">
+                <h3>Documents</h3>
+                <p>Passport, visa, admission notice, JW form, medical records, insurance, and digital backups.</p>
+              </article>
+              <article class="info-item">
+                <h3>Power</h3>
+                <p>Universal adapter, power bank, spare charging cables, and laptop charger.</p>
+              </article>
+              <article class="info-item">
+                <h3>Health</h3>
+                <p>Prescription medicine, basic pain relief, allergy meds, and any doctor notes.</p>
+              </article>
+              <article class="info-item">
+                <h3>Arrival Kit</h3>
+                <p>Comfortable shoes, toiletries, a towel, snacks, reusable bottle, and some local cash.</p>
+              </article>
+            </div>
+          </section>
+
+          <section id="budget" aria-labelledby="budgetTitle">
+            <div class="section-head">
+              <div>
+                <h2 id="budgetTitle">Budgeting Tips</h2>
+                <p>Typical student costs vary by city. Bigger cities usually cost more.</p>
+              </div>
+            </div>
+
+            <ul class="budget-list">
+              <li><strong>Dorm or shared room</strong><strong>¥800-3,000</strong></li>
+              <li><strong>Food</strong><strong>¥1,200-2,500</strong></li>
+              <li><strong>Transport</strong><strong>¥100-300</strong></li>
+              <li><strong>Phone and internet</strong><strong>¥50-150</strong></li>
+              <li><strong>Study and personal costs</strong><strong>¥500-1,500</strong></li>
+            </ul>
+            <p class="note">Keep an emergency buffer for deposits, health checks, residence permit fees, bedding, and winter clothing if you arrive with light luggage.</p>
+          </section>
+
+          <section id="first-week" aria-labelledby="firstWeekTitle">
+            <div class="section-head">
+              <div>
+                <h2 id="firstWeekTitle">First-Week Guide</h2>
+                <p>Handle these early so life gets easier fast.</p>
+              </div>
+            </div>
+
+            <ol class="guide-list">
+              <li><strong>Register at your university</strong><p>Bring your passport, admission documents, photos, and any fee receipts.</p></li>
+              <li><strong>Get a local SIM card</strong><p>A Chinese number helps with apps, deliveries, banking, and campus systems.</p></li>
+              <li><strong>Complete health or police registration steps</strong><p>Ask the international office what deadlines apply in your city.</p></li>
+              <li><strong>Set up payments</strong><p>Connect Alipay or WeChat Pay as soon as your bank card or supported international card works.</p></li>
+              <li><strong>Learn your daily route</strong><p>Save your dorm, campus office, nearest metro station, hospital, and grocery store on your map app.</p></li>
+            </ol>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      Built for calm arrivals, clear priorities, and fewer last-minute surprises.
+    </footer>
+  </div>
+
+  <script>
+    const root = document.documentElement;
+    const themeToggle = document.getElementById("themeToggle");
+    const checkboxes = Array.from(document.querySelectorAll("#visaChecklist input[type='checkbox']"));
+    const progressText = document.getElementById("progressText");
+    const progressDetail = document.getElementById("progressDetail");
+    const progressFill = document.getElementById("progressFill");
+    const visaStat = document.getElementById("visaStat");
+    const storageKey = "china-survival-companion";
+
+    const savedState = JSON.parse(localStorage.getItem(storageKey) || "{}");
+
+    function saveState() {
+      const checked = checkboxes.filter((box) => box.checked).map((box) => box.id);
+      localStorage.setItem(storageKey, JSON.stringify({
+        theme: root.dataset.theme || "light",
+        checked
+      }));
+    }
+
+    function updateProgress() {
+      const total = checkboxes.length;
+      const completed = checkboxes.filter((box) => box.checked).length;
+      const percent = Math.round((completed / total) * 100);
+
+      progressText.textContent = `${percent}%`;
+      progressDetail.textContent = `${completed} of ${total} completed`;
+      progressFill.style.width = `${percent}%`;
+      visaStat.textContent = `${completed} / ${total}`;
+      saveState();
+    }
+
+    function setTheme(theme) {
+      root.dataset.theme = theme;
+      const isDark = theme === "dark";
+      themeToggle.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
+      themeToggle.querySelector("span").textContent = isDark ? "Light mode" : "Dark mode";
+      saveState();
+    }
+
+    if (savedState.theme) {
+      setTheme(savedState.theme);
+    } else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      setTheme("dark");
+    } else {
+      setTheme("light");
+    }
+
+    if (Array.isArray(savedState.checked)) {
+      checkboxes.forEach((box) => {
+        box.checked = savedState.checked.includes(box.id);
+      });
+    }
+
+    checkboxes.forEach((box) => box.addEventListener("change", updateProgress));
+    themeToggle.addEventListener("click", () => {
+      setTheme(root.dataset.theme === "dark" ? "light" : "dark");
+    });
+
+    updateProgress();
+  </script>
+
+
+</body></html>
